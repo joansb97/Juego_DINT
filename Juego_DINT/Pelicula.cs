@@ -8,17 +8,21 @@ namespace Juego_DINT
 {
     class Pelicula
     {
+        public enum Genero 
+        {
+            Comedia,Miedo, Accion, Misterio
+        }
         string titulo { get; set; }
         string pista { get; set; }
         string imagen { get; set; }
         bool facil { get; set; }
         bool normal { get; set; }
         bool dificil { get; set; }
-        string genero { get; set; }
+        Genero genero { get; set; }
 
         public Pelicula() { }
 
-        public Pelicula(string titulo, string pista, string imagen, bool facil, bool normal,bool dificil, string genero)
+        public Pelicula(string titulo, string pista, string imagen, bool facil, bool normal,bool dificil, Genero genero)
         {
             this.titulo = titulo;
             this.pista = pista;

@@ -71,7 +71,65 @@
                 </DockPanel>
             </TabItem>
             <TabItem Header="Gestionar">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <ScrollViewer VerticalScrollBarVisibility="Visible" Grid.Row="0" Grid.ColumnSpan="2">
 
+                        </ScrollViewer>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Titulo de la pelicula"/>
+                        <TextBox Grid.Row="1" Grid.Column="1"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Pista de la Pelicula"/>
+                        <TextBox Grid.Row="2" Grid.Column="1"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Imagen de la Pelicula"/>
+                        <TextBox Grid.Row="3" Grid.Column="1"/>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Nivel de dificultad"/>
+                        <GroupBox Grid.Row="4" Grid.Column="1" BorderThickness="0">
+                            <StackPanel>
+                                <RadioButton x:Name="facilRadioButton" Content="Facil"/>
+                                <RadioButton x:Name="medioRadioButton" Content="Medio"/>
+                                <RadioButton x:Name="dificilRadioButton" Content="Dificil"/>
+                            </StackPanel>
+                        </GroupBox>
+                        <ComboBox Grid.Row="4" Grid.Column="2">
+                            <ComboBoxItem>Comedia</ComboBoxItem>
+                            <ComboBoxItem>Miedo</ComboBoxItem>
+                            <ComboBoxItem>Accion</ComboBoxItem>
+                            <ComboBoxItem>Misterio</ComboBoxItem>
+                        </ComboBox>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0">
+                            <Button x:Name="cargarButton" Content="Cargar de JSON"/>
+                            <Button x:Name="guardarButton" Content="Guardar en JSON"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1">
+                            <Button x:Name="eliminarButton" Content="Eliminar Pelicula"/>
+                            <Button x:Name="addButton" Content="Añadir Pelicula"/>
+                        </StackPanel>
+                        <Button x:Name="examinarButton" Content="Examinar" Grid.Row="2"/>
+                    </Grid>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
