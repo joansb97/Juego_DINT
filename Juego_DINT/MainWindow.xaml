@@ -10,6 +10,43 @@
         <Style TargetType="Image" x:Key="flechasImage">
             <Setter Property="Width" Value="50"/>
         </Style>
+        <Style TargetType="Grid" x:Key="jugarImageGrid">
+            <Setter Property="Margin" Value="20,10"/>
+            <Setter Property="Width" Value="300"/>
+        </Style>
+        <Style TargetType="Button" x:Key="jugarBotones">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBox" x:Key="puntuacionTextBox">
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="tituloTextBox">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="CheckBox" x:Key="pistaCheckBox">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="pistaTextBlock">
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="FontFamily" Value="Bold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="contadorTextBlock">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <TabControl>
@@ -22,7 +59,7 @@
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Image x:Name="flechaIzqImage" Grid.Column="0" Source="arrow.png" Style="{StaticResource flechasImage}"/>
-                        <TextBlock x:Name="contadorTextBlock" Grid.Column="1"/>
+                        <TextBlock x:Name="contadorTextBlock" Grid.Column="1" Style="{StaticResource contadorTextBlock}"/>
                         <Image x:Name="flechaDerqImage" Grid.Column="2" Source="arrow.png" Style="{StaticResource flechasImage}" RenderTransformOrigin="0.5,0.5">
                             <Image.RenderTransform>
                                 <TransformGroup>
@@ -34,39 +71,39 @@
                             </Image.RenderTransform>
                         </Image>
                     </Grid>
-                    <Grid DockPanel.Dock="Left">
+                    <Grid DockPanel.Dock="Left" Style="{StaticResource jugarImageGrid}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="20"></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Text="Cartel de la Pelicula"/>
-                        <Border Grid.Row="1">
-                            <Image x:Name="cartelImage"/>
+                        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2">
+                            <Image x:Name="cartelImage" Stretch="Fill"/>
                         </Border>
                     </Grid>
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="0.5*"></RowDefinition>
+                            <RowDefinition Height="2*"></RowDefinition>
+                            <RowDefinition Height="0.5*"></RowDefinition>
                             <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="0.5*"></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Puntuacion Total: " Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-                        <TextBox x:Name="puntuacionTextBox" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center"/>
-                        <Button x:Name="nuevaPartidaButton" Content="Nueva Partida" Grid.Column="1" Grid.Row="1"/>
+                        <TextBox x:Name="puntuacionTextBox" Grid.Column="0" Grid.Row="1" Style="{StaticResource puntuacionTextBox}"/>
+                        <Button x:Name="nuevaPartidaButton" Content="Nueva Partida" Grid.Column="1" Grid.Row="1" Style="{StaticResource jugarBotones}"/>
                         <TextBlock Text="Titulo de la Pelicula" Grid.Column="0" Grid.Row="2"/>
-                        <TextBox x:Name="tituloTextBox" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center"/>
-                        <Button x:Name="validarButton" Content="Validar" Grid.Column="1" Grid.Row="3"/>
-                        <CheckBox x:Name="pistaCheckBox" Content="Ver Pista" Grid.Column="0" Grid.Row="4"/>
-                        <TextBlock x:Name="pistaTextBlock" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2"/>
-                        <Image x:Name="generoImage" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2"/>
+                        <TextBox x:Name="tituloTextBox" Grid.Column="0" Grid.Row="3" Style="{StaticResource tituloTextBox}"/>
+                        <Button x:Name="validarButton" Content="Validar" Grid.Column="1" Grid.Row="3" Style="{StaticResource jugarBotones}"/>
+                        <CheckBox x:Name="pistaCheckBox" Content="Ver Pista" Grid.Column="0" Grid.Row="4" Style="{StaticResource pistaCheckBox}"/>
+                        <TextBlock x:Name="pistaTextBlock" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource pistaTextBlock}"/>
+                        <Image x:Name="generoImage" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Source="Comedia.jpg"/>
                     </Grid>
                 </DockPanel>
             </TabItem>
