@@ -35,6 +35,7 @@
         <Style TargetType="CheckBox" x:Key="pistaCheckBox">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Visibility" Value="Hidden"/>
         </Style>
         <Style TargetType="TextBlock" x:Key="pistaTextBlock">
             <Setter Property="FontStyle" Value="Italic"/>
@@ -57,7 +58,7 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Height" Value="25"/>
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="Padding" Value="2"/> 
+            <Setter Property="Padding" Value="2"/>
         </Style>
         <Style TargetType="Button" x:Key="gestionarButton">
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -68,13 +69,14 @@
         <Style TargetType="ComboBox" x:Key="comboBoxGestionar">
             <Setter Property="Width" Value="100"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Text" Value="Genero"/>
+            <Setter Property="SelectedValue" Value="{Binding Path= genero}"/>
         </Style>
         <Style TargetType="TextBlock" x:Key="generoTextBlock">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="15"/>
             <Setter Property="Margin" Value="10"/>
         </Style>
+        <local:generoTipoConverter x:Key="generoTipoConverter"/>
     </Window.Resources>
     <Grid>
         <TabControl>
@@ -129,14 +131,14 @@
                         <TextBlock Text="Titulo de la Pelicula" Grid.Column="0" Grid.Row="2"/>
                         <TextBox x:Name="tituloTextBox" Grid.Column="0" Grid.Row="3" Style="{StaticResource tituloTextBox}"/>
                         <Button x:Name="validarButton" Content="Validar" Grid.Column="1" Grid.Row="3" Style="{StaticResource jugarBotones}"/>
-                        <CheckBox x:Name="pistaCheckBox" Content="Ver Pista" Grid.Column="0" Grid.Row="4" Style="{StaticResource pistaCheckBox}"/>
+                        <CheckBox x:Name="pistaCheckBox" Content="Ver Pista" Grid.Column="0" Grid.Row="4" Style="{StaticResource pistaCheckBox}" Click="pistaCheckBox_Click"/>
                         <TextBlock x:Name="pistaTextBlock" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource pistaTextBlock}"/>
                         <Image x:Name="generoImage" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Source="Comedia.jpg"/>
                     </Grid>
                 </DockPanel>
             </TabItem>
             <TabItem Header="Gestionar">
-                <Grid>
+                <Grid x:Name="gestionarGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"></ColumnDefinition>
                         <ColumnDefinition Width="0.75*"></ColumnDefinition>
@@ -150,22 +152,26 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="8*"></ColumnDefinition>
+                            <ColumnDefinition Width="202*"/>
+                            <ColumnDefinition Width="419*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Border BorderBrush="Black" BorderThickness="3" Grid.Row="0" Grid.ColumnSpan="2">
+                        <Border BorderBrush="Black" BorderThickness="3" Grid.Row="0" Grid.ColumnSpan="3">
                             <ScrollViewer VerticalScrollBarVisibility="Visible">
-
+                                <StackPanel>
+                                    <Image/>
+                                    <TextBlock/>
+                                </StackPanel>
                             </ScrollViewer>
                         </Border>
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Titulo de la pelicula" Style="{StaticResource gestionarTextBlock}"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource gestionarTextBox}"/>
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Pista de la Pelicula" Style="{StaticResource gestionarTextBlock}"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource gestionarTextBox}"/>
-                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Imagen de la Pelicula" Style="{StaticResource gestionarTextBlock}"/>
-                        <TextBox Grid.Row="3" Grid.Column="1" Style="{StaticResource gestionarTextBox}"/>
-                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Nivel de dificultad" Style="{StaticResource gestionarTextBlock}"/>
-                        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="Titulo de la pelicula" Style="{StaticResource gestionarTextBlock}" Margin="0,18,9,18"/>
+                        <TextBox x:Name="titulogestionarTextBox" Grid.Row="1" Grid.Column="2" Style="{StaticResource gestionarTextBox}" Height="26" Margin="5,15"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="Pista de la Pelicula" Style="{StaticResource gestionarTextBlock}" Margin="0,18,9,18"/>
+                        <TextBox x:Name="pistagestionarTextBox" Grid.Row="2" Grid.Column="2" Style="{StaticResource gestionarTextBox}" Height="26" Margin="5,15"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="Imagen de la Pelicula" Style="{StaticResource gestionarTextBlock}" Margin="0,18,10,18"/>
+                        <TextBox x:Name="imagengestionarTextBox" Grid.Row="3" Grid.Column="2" Style="{StaticResource gestionarTextBox}" Height="26" Margin="5,15"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1" Text="Nivel de dificultad" Style="{StaticResource gestionarTextBlock}" Margin="0,18,10,18"/>
+                        <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal">
                             <GroupBox BorderThickness="0" HorizontalAlignment="Left">
                                 <StackPanel>
                                     <RadioButton x:Name="facilRadioButton" Content="Facil"/>
@@ -174,12 +180,7 @@
                                 </StackPanel>
                             </GroupBox>
                             <TextBlock Text="Genero" Style="{StaticResource generoTextBlock}"/>
-                            <ComboBox Style="{StaticResource comboBoxGestionar}">
-                                <ComboBoxItem>Comedia</ComboBoxItem>
-                                <ComboBoxItem>Miedo</ComboBoxItem>
-                                <ComboBoxItem>Accion</ComboBoxItem>
-                                <ComboBoxItem>Misterio</ComboBoxItem>
-                            </ComboBox>
+                            <ComboBox x:Name="gestionarComboBox" Style="{StaticResource comboBoxGestionar}"></ComboBox>
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Column="2">
@@ -189,12 +190,12 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0">
-                            <Button x:Name="cargarButton" Content="Cargar de JSON" Style="{StaticResource gestionarButton}"/>
-                            <Button x:Name="guardarButton" Content="Guardar en JSON" Style="{StaticResource gestionarButton}"/>
+                            <Button x:Name="cargarButton" Content="Cargar de JSON" Style="{StaticResource gestionarButton}" Click="cargarButton_Click"/>
+                            <Button x:Name="guardarButton" Content="Guardar en JSON" Style="{StaticResource gestionarButton}" Click="guardarButton_Click"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1">
                             <Button x:Name="eliminarButton" Content="Eliminar Pelicula" Style="{StaticResource gestionarButton}"/>
-                            <Button x:Name="addButton" Content="Añadir Pelicula" Style="{StaticResource gestionarButton}"/>
+                            <Button x:Name="addButton" Content="Añadir Pelicula" Style="{StaticResource gestionarButton}" Click="addButton_Click    "/>
                         </StackPanel>
                         <Button x:Name="examinarButton" Content="Examinar" Grid.Row="2" Style="{StaticResource gestionarButton}"/>
                     </Grid>

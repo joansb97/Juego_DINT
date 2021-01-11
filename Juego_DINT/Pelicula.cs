@@ -19,6 +19,7 @@ namespace Juego_DINT
         bool normal { get; set; }
         bool dificil { get; set; }
         Genero genero { get; set; }
+        int puntuacion { get; set; }
 
         public Pelicula() { }
 
@@ -31,6 +32,10 @@ namespace Juego_DINT
             this.normal = normal;
             this.dificil = dificil;
             this.genero = genero;
+
+            if (facil == true) puntuacion = 10;
+            else if (normal == true) puntuacion = 6;
+            else puntuacion = 4;
         }
     }
 }
